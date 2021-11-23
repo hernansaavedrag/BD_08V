@@ -170,4 +170,13 @@ public class Registro {
         return lista;
     }
     
+    public boolean buscarLibro(List<Libro> lista,String titulo){
+        for (Libro libro : lista) {
+            if (libro.getTitulo().equals(titulo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }
