@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import modelo.Libro;
 
 /**
@@ -274,6 +275,7 @@ public class Actualizar extends javax.swing.JFrame {
         Libro libro = new Libro(id, titulo, autor, fecha, precio, true);
         
         reg.actualizar(libro);
+        JOptionPane.showMessageDialog(this, "Datos Actualizados", "Aviso",2);
 
     }//GEN-LAST:event_jbtn_actualizarActionPerformed
 
