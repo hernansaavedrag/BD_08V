@@ -5,19 +5,33 @@
  */
 package vista;
 
+import controlador.Registro;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modelo.Libro;
+
 /**
  *
  * @author USRVI-LC3
  */
 public class Actualizar extends javax.swing.JFrame {
 
+     Registro reg = new Registro();
+     
+    
     /**
      * Creates new form Actualizar
      */
     public Actualizar() {
         initComponents();
         this.jtxt_tituloBuscado.setEnabled(false);
-        
+        this.jtxt_autorBuscado.setEnabled(false);
+        this.jtxt_precioBuscado.setEnabled(false);
+        this.jtxt_fechaBuscada.setEnabled(false);
+
     }
 
     /**
@@ -31,7 +45,7 @@ public class Actualizar extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jbtn_idBuscar = new javax.swing.JTextField();
+        jtxt_idBuscar = new javax.swing.JTextField();
         jbtn_buscar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -42,9 +56,11 @@ public class Actualizar extends javax.swing.JFrame {
         jtxt_autorBuscado = new javax.swing.JTextField();
         jtxt_precioBuscado = new javax.swing.JTextField();
         jtxt_fechaBuscada = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jbtn_actualizar = new javax.swing.JButton();
         jbtn_volver = new javax.swing.JButton();
+        jbtn_editar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -53,6 +69,11 @@ public class Actualizar extends javax.swing.JFrame {
         jLabel1.setText("Id:");
 
         jbtn_buscar.setText("Buscar");
+        jbtn_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_buscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -62,7 +83,7 @@ public class Actualizar extends javax.swing.JFrame {
                 .addGap(105, 105, 105)
                 .addComponent(jLabel1)
                 .addGap(33, 33, 33)
-                .addComponent(jbtn_idBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtxt_idBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtn_buscar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -73,7 +94,7 @@ public class Actualizar extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jbtn_idBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxt_idBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtn_buscar))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -87,6 +108,8 @@ public class Actualizar extends javax.swing.JFrame {
         jLabel4.setText("Precio:");
 
         jLabel5.setText("Fecha: ");
+
+        jLabel6.setText("dd/mm/aaaa");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -108,7 +131,10 @@ public class Actualizar extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jtxt_autorBuscado, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                    .addComponent(jtxt_fechaBuscada))
+                    .addComponent(jtxt_fechaBuscada)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel6)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -126,26 +152,47 @@ public class Actualizar extends javax.swing.JFrame {
                     .addComponent(jtxt_precioBuscado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxt_fechaBuscada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
 
         jbtn_actualizar.setText("Actualizar");
+        jbtn_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_actualizarActionPerformed(evt);
+            }
+        });
 
         jbtn_volver.setText("Volver");
+        jbtn_volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_volverActionPerformed(evt);
+            }
+        });
+
+        jbtn_editar.setText("Editar");
+        jbtn_editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_editarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
+                .addContainerGap(52, Short.MAX_VALUE)
+                .addComponent(jbtn_editar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jbtn_actualizar)
-                .addGap(51, 51, 51)
+                .addGap(18, 18, 18)
                 .addComponent(jbtn_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +200,8 @@ public class Actualizar extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtn_actualizar)
-                    .addComponent(jbtn_volver))
+                    .addComponent(jbtn_volver)
+                    .addComponent(jbtn_editar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -177,6 +225,65 @@ public class Actualizar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbtn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarActionPerformed
+
+        int id = Integer.parseInt(this.jtxt_idBuscar.getText());
+
+       
+        Libro libro = reg.buscarPorId(id);
+
+        String titulo = libro.getTitulo();
+        String autor = libro.getAutor();
+        Date fecha = libro.getPublicacion();
+        int precio = libro.getPrecio();
+        boolean disponible = libro.isDisponible(); // falto formularo disponible
+
+        this.jtxt_tituloBuscado.setText(titulo);
+        this.jtxt_autorBuscado.setText(autor);
+        this.jtxt_fechaBuscada.setText(""+fecha);
+        this.jtxt_precioBuscado.setText(String.valueOf(precio));
+        
+
+
+    }//GEN-LAST:event_jbtn_buscarActionPerformed
+
+    private void jbtn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_volverActionPerformed
+        dispose();
+    }//GEN-LAST:event_jbtn_volverActionPerformed
+
+    private void jbtn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_actualizarActionPerformed
+       
+        
+        int precio,id;
+        String titulo,autor;
+        
+        id = Integer.parseInt(this.jtxt_idBuscar.getText());
+        titulo = this.jtxt_tituloBuscado.getText();
+        autor = this.jtxt_autorBuscado.getText();
+        precio = Integer.parseInt(this.jtxt_precioBuscado.getText());
+       
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        Date fecha=null;
+         try {
+             fecha = formato.parse(this.jtxt_fechaBuscada.getText());
+         } catch (ParseException ex) {
+             System.out.println("Error de actualizacion de fecha " + ex.getMessage());
+         }
+        
+        Libro libro = new Libro(id, titulo, autor, fecha, precio, true);
+        
+        reg.actualizar(libro);
+
+    }//GEN-LAST:event_jbtn_actualizarActionPerformed
+
+    private void jbtn_editarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_editarActionPerformed
+        this.jtxt_tituloBuscado.setEnabled(true);
+        this.jtxt_autorBuscado.setEnabled(true);
+        this.jtxt_precioBuscado.setEnabled(true);
+        this.jtxt_fechaBuscada.setEnabled(true);
+        
+    }//GEN-LAST:event_jbtn_editarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,15 +326,17 @@ public class Actualizar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton jbtn_actualizar;
     private javax.swing.JButton jbtn_buscar;
-    private javax.swing.JTextField jbtn_idBuscar;
+    private javax.swing.JButton jbtn_editar;
     private javax.swing.JButton jbtn_volver;
     private javax.swing.JTextField jtxt_autorBuscado;
     private javax.swing.JTextField jtxt_fechaBuscada;
+    private javax.swing.JTextField jtxt_idBuscar;
     private javax.swing.JTextField jtxt_precioBuscado;
     private javax.swing.JTextField jtxt_tituloBuscado;
     // End of variables declaration//GEN-END:variables
