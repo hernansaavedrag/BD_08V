@@ -29,8 +29,13 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         jmi_agregar = new javax.swing.JMenuItem();
+        jmi_eliminar = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
         jmi_listar = new javax.swing.JMenuItem();
+        jmi_listar2 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jmi_salir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -39,13 +44,35 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu1.setText("Libros");
 
+        jMenu3.setText("Opciones");
+
         jmi_agregar.setText("Agregar");
         jmi_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmi_agregarActionPerformed(evt);
             }
         });
-        jMenu1.add(jmi_agregar);
+        jMenu3.add(jmi_agregar);
+
+        jmi_eliminar.setText("Eliminar");
+        jmi_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_eliminarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jmi_eliminar);
+
+        jMenuItem1.setText("Actualizar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
+
+        jMenu1.add(jMenu3);
+
+        jMenu4.setText("Mostrar Datos");
 
         jmi_listar.setText("Listar");
         jmi_listar.addActionListener(new java.awt.event.ActionListener() {
@@ -53,7 +80,17 @@ public class Menu extends javax.swing.JFrame {
                 jmi_listarActionPerformed(evt);
             }
         });
-        jMenu1.add(jmi_listar);
+        jMenu4.add(jmi_listar);
+
+        jmi_listar2.setText("Listar con Id");
+        jmi_listar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmi_listar2ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jmi_listar2);
+
+        jMenu1.add(jMenu4);
         jMenu1.add(jSeparator1);
 
         jmi_salir.setText("Salir");
@@ -102,6 +139,18 @@ public class Menu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmi_listarActionPerformed
 
+    private void jmi_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_eliminarActionPerformed
+        new Eliminar().setVisible(true);
+    }//GEN-LAST:event_jmi_eliminarActionPerformed
+
+    private void jmi_listar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmi_listar2ActionPerformed
+        new Listar2().setVisible(true);
+    }//GEN-LAST:event_jmi_listar2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        new Actualizar().setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -140,10 +189,15 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuItem jmi_agregar;
+    private javax.swing.JMenuItem jmi_eliminar;
     private javax.swing.JMenuItem jmi_listar;
+    private javax.swing.JMenuItem jmi_listar2;
     private javax.swing.JMenuItem jmi_salir;
     // End of variables declaration//GEN-END:variables
 }
